@@ -1,7 +1,6 @@
 import io
 import struct
 import numpy as np
-import numpy.ma
 
 from .protocol import TypeCode, SizeCode, NOP_TAG
 
