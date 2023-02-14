@@ -8,7 +8,7 @@ sys.path.append(parentdir)
 import numpy as np
 import numpy.ma as ma
 from dataclasses import dataclass
-import litevectors
+import ltvpy
 
 @dataclass
 class AClass:
@@ -44,9 +44,9 @@ data = {
 }
 
 with open('python_data.ltv', 'wb') as w:
-    litevectors.dump(data, w)
+    ltvpy.dump(data, w)
 
 with open('python_data.ltv', 'rb') as f:
-    v = litevectors.load(f)
+    v = ltvpy.load(f)
     pp = pprint.PrettyPrinter(indent=4, sort_dicts=False)
     pp.pprint(v)

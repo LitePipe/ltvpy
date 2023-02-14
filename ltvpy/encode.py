@@ -104,29 +104,32 @@ class LiteVectorEncoder:
             self.write_vector(dt[1], v.tobytes())
             return
 
-        # Advanced array protocol
+        raise TypeError(f'unsuppported numpy array of type {a.__class__.__name__} '
+                        f'is not LiteVector serializable')
 
-        # Check for mask
-        mask = None
-        if isinstance(v, numpy.ma.masked_array):
-            mask = numpy.ma.getmaskarray(v)
-            v = v.data
+        # TODO: Advanced array protocol
 
-        self.write_tag(TypeCode.STRUCT)
-        self.write_key_value("dtype", dt[2])
-        self.write_key_value("shape", v.shape)
+        # # Check for mask
+        # mask = None
+        # if isinstance(v, numpy.ma.masked_array):
+        #     mask = numpy.ma.getmaskarray(v)
+        #     v = v.data
 
-        self.write_string("data")
-        if dt[1] is not None:
-            self.write_vector(dt[1], v.tobytes())
-        else:
-            self.write_vector(TypeCode.U8, v.tobytes())
+        # self.write_tag(TypeCode.STRUCT)
+        # self.write_key_value("dtype", dt[2])
+        # self.write_key_value("shape", v.shape)
 
-        if mask is not None:
-            self.write_string("mask")
-            self.write_vector(TypeCode.BOOL, mask.tobytes())
+        # self.write_string("data")
+        # if dt[1] is not None:
+        #     self.write_vector(dt[1], v.tobytes())
+        # else:
+        #     self.write_vector(TypeCode.U8, v.tobytes())
 
-        self.write_tag(TypeCode.END)
+        # if mask is not None:
+        #     self.write_string("mask")
+        #     self.write_vector(TypeCode.BOOL, mask.tobytes())
+
+        # self.write_tag(TypeCode.END)
         
     def write_key_value(self, key: str, val):
         self.write_string(key)

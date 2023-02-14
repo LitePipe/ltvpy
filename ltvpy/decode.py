@@ -7,14 +7,14 @@ from .protocol import TypeCode, SizeCode, NOP_TAG
 _BUFFER_LENGTHS = [0, 1, 2, 4, 8]
 
 _INT_CODES = {
-    TypeCode.I8:   (1, True),
     TypeCode.U8:  (1, False),
-    TypeCode.I16:  (2, True),
     TypeCode.U16: (2, False),
-    TypeCode.I32:  (4, True),
     TypeCode.U32: (4, False),
-    TypeCode.I64:  (8, True),
     TypeCode.U64: (8, False),
+    TypeCode.I8:   (1, True),
+    TypeCode.I16:  (2, True),
+    TypeCode.I32:  (4, True),
+    TypeCode.I64:  (8, True),
 }
 
 _NP_TAG_DTYPES = {
@@ -152,7 +152,7 @@ class LiteVectorDecoder:
                 buf = self.read_bytes(buf_len)
                 return np.frombuffer(buf, dtype=_NP_TAG_DTYPES[type_code])
             
-        raise ValueError("Unknown LiteVector type_code: " + str(type_code) + ", size_code: " + str(size_code))
+        raise ValueError(f'Unknown LiteVector type_code: {type_code}, size_code: {size_code}')
 
     def read_one(self):
         """ Read one element from the stream """

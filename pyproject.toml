@@ -5,6 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "ltvpy"
 version = "1.0.0"
+license = {file = "LICENSE"}
 authors = [
   { name="Thad Thompson", email="thad@litepipe.com" },
 ]
@@ -15,11 +16,13 @@ dependencies = [
     'numpy >= 1.15'
 ]
 classifiers = [
+    "Intended Audience :: Developers",
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/LitePipe/ltvpy"
+"Homepage" = "https://litevectors.org/"
+"Source" = "https://github.com/LitePipe/ltvpy"
 "Bug Tracker" = "https://github.com/LitePipe/ltvpy/issues"
