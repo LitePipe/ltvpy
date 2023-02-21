@@ -1,12 +1,11 @@
 # Parse the canonical test vectors
 
 import unittest
-import os
-
-import numpy as np
 from dataclasses import dataclass
+import numpy as np
 
 import ltvpy
+
 
 class TestRoundTripping(unittest.TestCase):
 
@@ -32,6 +31,22 @@ class TestRoundTripping(unittest.TestCase):
         d2 = ltvpy.loadb(bin)
 
         self.assertDictEqual(d1, d2)
+
+    def test_dataclass(self):
+        @dataclass
+        class AClass:
+            strdata: str
+            fdata: float
+            int_data: int = 77
+
+        d1 = AClass("ThatClass", 99.9)
+        bin = ltvpy.dumpb(d1)
+        d2 = ltvpy.loadb(bin)
+
+        self.assertEqual(d1.strdata, d2['strdata'])
+        self.assertEqual(d1.fdata, d2['fdata'])
+        self.assertEqual(d1.int_data, d2['int_data'])
+
 
     def test_numpy_vectors(self):
         d1 = {
